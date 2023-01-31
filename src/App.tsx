@@ -1,16 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Button, Space } from 'antd';
 import { BrowserRouter } from 'react-router-dom';
 import SiteContent from './layout/SiteContent';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <SiteContent></SiteContent>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <SiteContent></SiteContent>
+        </BrowserRouter>
+        {process.env.NODE_ENV === "development" && <ReactQueryDevtools initialIsOpen={false} />}
+      </QueryClientProvider>
     </React.Fragment>
   );
 }
