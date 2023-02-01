@@ -4,6 +4,7 @@ import SiteContent from './layout/SiteContent';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Button, ConfigProvider } from 'antd'
+import Auth from './components/Auth';
 
 const queryClient = new QueryClient()
 
@@ -13,7 +14,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <ConfigProvider theme={{ token: { fontSize: 14 } }}>
-            <SiteContent></SiteContent>
+            <Auth>
+              <SiteContent></SiteContent>
+            </Auth>
           </ConfigProvider>
         </BrowserRouter>
         {/* {process.env.NODE_ENV === "development" && <ReactQueryDevtools initialIsOpen={false} />} */}

@@ -4,6 +4,7 @@ import useLogin from '../../query/account/useLogin'
 import { css } from "@emotion/css";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/hooks';
 
 const boxStyle = css({
   position: "relative",
@@ -50,9 +51,10 @@ type Props = {}
 
 const Login = (props: Props) => {
   const aciton = useLogin()
+  const auth = useAuth()
   const onFinish = async (values: IFields) => {
     let response = await aciton.mutateAsync({ name: values.name, password: values.password })
-    console.log(response)
+    auth.dispatch({ type: "login", payload: { remember: values.remember, token: response.token, username: response.name } })
     message.success("登录成功")
   }
   return (
