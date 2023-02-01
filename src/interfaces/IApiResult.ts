@@ -1,5 +1,5 @@
 export default interface IApiResult<T> {
-    Success: boolean
-    Message: string
-    Data: T
+    success: boolean
+    message: string
+    data: T
 }

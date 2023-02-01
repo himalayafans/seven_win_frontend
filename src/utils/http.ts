@@ -1,7 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios"
 import { REACT_APP_API_URL } from "../config";
 import IApiResult from "../interfaces/IApiResult";
 import { readAuthInfo } from "./storage";
+import { isNullOrWhitespace } from "./string.helper";
 
 const getStatusMessage = (status: any) => {
     let message = ''
@@ -40,7 +41,7 @@ const getStatusMessage = (status: any) => {
             message = 'HTTP版本不受支持(505)'
             break
         default:
-            message = `连接出错(${status})!`
+            message = `连接出错!`
     }
     return message
 }
@@ -106,14 +107,13 @@ class Http {
     }
 
     // 处理全局应用错误
-    private static handleError(error: any) {
+    private static handleError(error: AxiosError<any, IApiResult<any>>) {
         // 将错误统一抛出为Error
         const { response } = error;
-        console.log(response)
-        const data = response.data as IApiResult<any>
-        let errMsg = getStatusMessage(response.status)
-        if (!data.Success) {
-            errMsg = data.Message
+        const data = response?.data as IApiResult<any>
+        let errMsg = getStatusMessage(response?.status)
+        if (data && !isNullOrWhitespace(data.message)) {
+            errMsg = data.message
         }
         return Promise.reject(new Error(errMsg));
     }

@@ -8,7 +8,7 @@ import { http } from "../utils/http";
 export const login = async (request: ILoginRequest): Promise<ILoginResponse> => {
     const api = `/account/login`;
     let res = await http.post<any, IApiResult<ILoginResponse>>(api, request)
-    return res.data.Data
+    return res.data.data
 }
 
 /** 注册 */
