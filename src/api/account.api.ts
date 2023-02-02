@@ -13,6 +13,6 @@ export const login = async (request: ILoginRequest): Promise<ILoginResponse> => 
 
 /** 注册 */
 export const register = async (request: IRegisterRequest) => {
-    const api = `/account/login`;
-    await http.post<any, IApiResult<ILoginResponse>>(api, request)
+    const api = `/account/register`;
+    await http.post<any, IApiResult<any>>(api, request)
 }

@@ -1,4 +1,4 @@
 export default interface IRegisterRequest{
-    Name: string,
-    Password: string
+    name: string,
+    password: string
 }
