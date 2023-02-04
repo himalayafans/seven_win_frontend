@@ -1,10 +1,11 @@
 import { Layout } from 'antd'
 import React from 'react'
 import Brand from './Brand'
-import LayoutContent from './LayoutContent'
-import LayoutHeader from './LayoutHeader'
+import Content from './Content'
+import Header from './Header'
+import Nav from './Nav'
 import Sider from './Sider'
-import SiderNav from './SiderNav'
+import Tools from './Tools'
 import TriggerButton from './TriggerButton'
 
 type Props = {}
@@ -16,16 +17,16 @@ const Dashboard = (props: Props) => {
             <Layout style={{ minHeight: "100vh" }} hasSider>
                 <Sider collapsed={collapsed}>
                     <Brand collapsed={collapsed}></Brand>
-                    <SiderNav></SiderNav>
+                    <Nav></Nav>
                 </Sider>
                 <Layout>
-                    <LayoutHeader>
+                    <Header>
                         <TriggerButton collapsed={collapsed} onClick={() => setCollapsed(!collapsed)}></TriggerButton>
-                    </LayoutHeader>
-                    <LayoutContent>
+                        <Tools></Tools>
+                    </Header>
+                    <Content>
                         <p>long content</p>
                         {
-                            // indicates very long content
                             Array.from({ length: 100 }, (_, index) => (
                                 <React.Fragment key={index}>
                                     {index % 20 === 0 && index ? 'more' : '...'}
@@ -33,7 +34,7 @@ const Dashboard = (props: Props) => {
                                 </React.Fragment>
                             ))
                         }
-                    </LayoutContent>
+                    </Content>
                     <Layout.Footer style={{ textAlign: "center" }}>喜马拉雅货币志愿者社区（喜粉团/喜学院）</Layout.Footer>
                 </Layout>
             </Layout>

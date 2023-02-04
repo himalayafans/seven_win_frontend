@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Button, ConfigProvider } from 'antd'
 import Auth from './components/Auth';
+import "./App.css"
 
 const queryClient = new QueryClient()
 

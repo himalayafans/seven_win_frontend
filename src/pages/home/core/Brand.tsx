@@ -6,7 +6,7 @@ import logo from '../../..//logo.svg';
 const boxStyle = css({
     height: "32px",
     width: "180px",
-    margin: "16px 8px",
+    padding: "32px 8px",
     display: "flex",
     alignItems: "center",
     flexWrap: "nowrap",

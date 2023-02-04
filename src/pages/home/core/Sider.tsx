@@ -3,12 +3,8 @@ import { Layout } from 'antd'
 import { css } from "@emotion/css"
 
 const style = css({
-    overflow: 'auto',
-    height: '100vh',
-    position: 'fixed',
-    left: 0,
-    top: 0,
-    bottom: 0,
+    position: "sticky",
+    top: 0
 })
 
 type Props = {
@@ -18,8 +14,10 @@ type Props = {
 
 const Sider = (props: Props) => {
     return (
-        <Layout.Sider className={style} collapsed={props.collapsed}>
-            {props.children}
+        <Layout.Sider collapsed={props.collapsed}>
+            <div style={{ position: "sticky", top: 0 }}>
+                {props.children}
+            </div>
         </Layout.Sider>
     )
 }

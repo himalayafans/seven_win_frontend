@@ -13,10 +13,10 @@ const items: ItemType[] = [
 
 type Props = {}
 
-const SiderNav = (props: Props) => {
+const Nav = (props: Props) => {
     return (
         <Menu theme="dark" mode="vertical" items={items}></Menu>
-      )
+    )
 }
 
-export default SiderNav
+export default Nav
