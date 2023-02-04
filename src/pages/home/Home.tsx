@@ -1,12 +1,12 @@
 import React from 'react'
-import Dashboard from './core/Dashboard';
+import Dashboard from '../../dashboard/Dashboard'
 
 type Props = {}
 
 const Home = (props: Props) => {
     return (
         <React.Fragment>
-            <Dashboard></Dashboard>
+            <p>home</p>
         </React.Fragment>
     )
 }

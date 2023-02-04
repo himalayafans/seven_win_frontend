@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from "@emotion/css";
 import classNames from 'classnames';
-import logo from '../../..//logo.svg';
+import logo from '../../logo.svg';
 
 const boxStyle = css({
     height: "32px",

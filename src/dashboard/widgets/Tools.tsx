@@ -2,7 +2,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Menu, message, Modal, Space } from 'antd'
 import React from 'react'
 import type { MenuProps } from 'antd';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 
 type Props = {}
 
