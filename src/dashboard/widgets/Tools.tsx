@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons'
-import { Button, Dropdown, Menu, message, Modal, Space } from 'antd'
+import { Avatar, Button, Dropdown, Menu, message, Modal, Space } from 'antd'
 import React from 'react'
 import type { MenuProps } from 'antd';
 import useAuth from '../../hooks/useAuth';
@@ -36,7 +36,7 @@ const Tools = (props: Props) => {
         <div style={{ marginLeft: "auto", display: "inline-block" }}>
             <Space>
                 <Dropdown trigger={['click']} menu={{ items }} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                    <Button shape="circle" icon={<UserOutlined />}></Button>
+                    <Avatar style={{ backgroundColor: '#87d068', cursor: "pointer" }} icon={<UserOutlined />} />
                 </Dropdown>
             </Space>
             <Modal title="提示" open={isOpen} onOk={handleExit} onCancel={handleCancel}>

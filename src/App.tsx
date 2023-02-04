@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import SiteContent from './layout/SiteContent';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import { Button, ConfigProvider } from 'antd'
 import Auth from './components/Auth';
 import "./App.css"
