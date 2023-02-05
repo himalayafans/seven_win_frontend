@@ -1,47 +1,55 @@
-import { Alert, Button, Card, Col, Empty, Input, Row, Spin } from 'antd'
+import { Col, Input, message, Row, Spin } from 'antd'
 import React from 'react'
 import { Breadcrumb } from 'antd';
-import useGetAccounts from '../../query/account/useGetAccounts'
 import ContentBox from '../../components/ContentBox';
+import { useSearchAccounts } from '../../query/account/useSearchAccounts';
+import { AccountsReducer, getInitState } from './core/account.store';
+import { AccountsContext } from './core/accounts.context';
 import List from './widgets/List';
 
 type Props = {}
 
 const Accounts = (props: Props) => {
-    const query = useGetAccounts()
-    const onSearch = (value: string) => {
-        console.log(value)
-        query.refetch()
+    const [value, setValue] = React.useState("")
+    const query = useSearchAccounts(value)
+    const [state, dispatch] = React.useReducer(AccountsReducer, getInitState())
+
+    const onSearch = (inputValue: string) => {
+        setValue(inputValue)
     }
+
+    React.useEffect(() => {
+        dispatch({ type: "full", payload: query.data ? query.data : [] })
+    }, [query.data])
+
+    React.useEffect(() => {
+        if (query.isError && query.error) {
+            message.error(query.error.message)
+        }
+    }, [query.error, query.isError])
+
     return (
         <React.Fragment>
             <Breadcrumb>
                 <Breadcrumb.Item>首页</Breadcrumb.Item>
                 <Breadcrumb.Item>账号管理</Breadcrumb.Item>
             </Breadcrumb>
-            <ContentBox>
-                <Row>
-                    <Col xl={8} lg={12} md={24}>
-                        <Input.Search allowClear enterButton="搜索" size="large" onSearch={onSearch} loading={query.isLoading} />
-                    </Col>
-                </Row>
-            </ContentBox>
-            <ContentBox>
-                <List query={query}></List>
-            </ContentBox>
+            <AccountsContext.Provider value={{ dispatch, state }}>
+                <ContentBox>
+                    <Row>
+                        <Col xl={8} lg={12} md={24}>
+                            <Input.Search allowClear enterButton="搜索" size="large" loading={!query.isLoading && query.isFetching} onSearch={onSearch} />
+                        </Col>
+                    </Row>
+                </ContentBox>
+                <Spin spinning={query.isLoading}>
+                    <ContentBox>
+                        <List></List>
+                    </ContentBox>
+                </Spin>
+            </AccountsContext.Provider>
         </React.Fragment>
     )
-
-    // if (query.isLoading) {
-    //     return <Spin></Spin>
-    // }
-    // if (query.isError) {
-    //     return <Alert message={query.error.message} type="error" />
-    // }
-    // if(query.data == null || query.data.length == 0){
-    //     return <Empty />
-    // }
-    // return <p>{query.data.length}</p>
 }
 
 export default Accounts
